@@ -1,0 +1,47 @@
+.header {
+  height: 88px;
+
+  .menu,
+  .title,
+  .nav {
+    display: flex;
+    flex-direction: row;
+    height: 44px;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #82828a;
+    padding-right: 8px;
+  }
+
+  .nav {
+    border-right: 1px solid #82828a;
+  }
+
+  .navButton {
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    justify-content: center;
+    align-items: flex-start;
+    color: #a1a1aa;
+    margin: 8px;
+  }
+
+  .abb {
+    font-size: smaller;
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+  }
+
+  .link {
+    color: whitesmoke;
+    margin: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+}
