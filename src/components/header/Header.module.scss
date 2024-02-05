@@ -1,35 +1,11 @@
 .header {
-  height: 88px;
-
-  .menu,
-  .title,
-  .nav {
-    display: flex;
-    flex-direction: row;
-    height: 44px;
-    justify-content: flex-start;
-    align-items: center;
-    border-bottom: 1px solid #82828a;
-    padding-right: 8px;
-  }
-
-  .nav {
-    border-right: 1px solid #82828a;
-  }
-
-  .navButton {
-    display: flex;
-    flex-direction: column;
-    width: 140px;
-    justify-content: center;
-    align-items: flex-start;
-    color: #a1a1aa;
-    margin: 8px;
-  }
-
-  .abb {
-    font-size: smaller;
-  }
+  display: flex;
+  flex-direction: row;
+  height: 44px;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #82828a;
+  padding-right: 8px;
 
   .icon {
     display: flex;
@@ -38,7 +14,7 @@
     margin: 8px;
   }
 
-  .link {
+  .title {
     color: whitesmoke;
     margin: 8px;
     justify-content: center;
