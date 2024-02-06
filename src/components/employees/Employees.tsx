@@ -1,9 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { TbUsersPlus, TbUsersMinus } from "react-icons/tb";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Employees.module.scss";
 import { checkAllEmployees } from "../../redux/slices/masterSlice";
 import { ICompanies, IEmployees } from "../../interfaces/interfaces";
+import { Employee } from "./Employee";
 
 export const Employees: FC = () => {
   const checkedCompanies = useAppSelector(
@@ -41,23 +43,56 @@ export const Employees: FC = () => {
   return (
     <>
       {employees && (
-        <div className={styles.main}>
-          <div className={styles.header}>
-            <input
-              type="checkbox"
-              name="allChecked"
-              checked={checkedEmployees.length === employees.length}
-              onChange={handleChange}
-            />
-            <label htmlFor="allChecked">Выделить все</label>
-            <a className={styles.icon}>
-              <IoMdAddCircleOutline color="#A1A1AA" size="2em" />
-            </a>
+        <>
+          <div className={styles.table}>
+            <div className={styles.tableHeader}>
+              <div className={styles.options}>
+                <input
+                  type="checkbox"
+                  id="allChecked"
+                  checked={checkedEmployees.length === employees.length}
+                  onChange={handleChange}
+                />
+                <label htmlFor="allChecked">Выделить все</label>
+              </div>
+              <div className={styles.options}>
+                {employees.length === 0 && (
+                  <>
+                    <a className={styles.icon}>
+                      <TbUsersPlus color="#A1A1AA" size="1.5em" />
+                    </a>
+                    <a>Добавить компанию</a>
+                  </>
+                )}
+                {employees.length !== 0 && (
+                  <>
+                    <a className={styles.icon}>
+                      <TbUsersMinus color="#A1A1AA" size="1.5em" />
+                    </a>
+                    <a>Удалить выбранных</a>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className={styles.main}>
+              <div className={styles.header}>
+                <div className={styles.checkBox}></div>
+                <div className={styles.title}>Название</div>
+                <div className={styles.quantity}>
+                  Количество <br />
+                  сотрудников
+                </div>
+                <div className={styles.address}>Адрес</div>
+                <div className={styles.actions}></div>
+              </div>
+              <div className={styles.items}>
+                {employees.map((item) => (
+                  <Employee key={item.id} employee={item} />
+                ))}
+              </div>
+            </div>
           </div>
-          {employees.map((item) => (
-            <div key={item.id}>{item.firstName}</div>
-          ))}
-        </div>
+        </>
       )}
     </>
   );

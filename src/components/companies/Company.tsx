@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
+import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Companies.module.scss";
 import { ICompany } from "../../interfaces/interfaces";
 import {
@@ -12,23 +12,31 @@ type Props = {
 };
 
 export const Company: FC<Props> = ({ company }) => {
-  const [checked, setChecked] = useState(false);
+  const checkedCompanies = useAppSelector(
+    (state) => state.master.checkedCompanies
+  );
   const dispatch = useAppDispatch();
 
   function handleCheckItem() {
-    if (!checked) {
-      setChecked(true);
+    if (!checkedCompanies.includes(company.id)) {
       dispatch(addCheckedCompany(company.id));
     } else {
-      setChecked(false);
       dispatch(removeCheckedCompany(company.id));
     }
   }
   return (
     <div className={styles.row}>
-      <input type="checkbox" checked={checked} onChange={handleCheckItem} />
-      <div>{company.name}</div>
-      <div>{company.adress}</div>
+      <div className={styles.checkBox}>
+        <input
+          type="checkbox"
+          checked={checkedCompanies.includes(company.id)}
+          onChange={handleCheckItem}
+        />
+      </div>
+      <div className={styles.title}>{company.name}</div>
+      <div className={styles.quantity}>{company.employees.length}</div>
+      <div className={styles.address}>{company.adress}</div>
+      <div className={styles.actions}>+ -</div>
     </div>
   );
 };

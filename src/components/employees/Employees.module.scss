@@ -1,4 +1,78 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .tableHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+
+    .options {
+      height: 40px;
+      width: 170px;
+      display: flex;
+      align-items: center;
+
+      a,
+      label {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+      }
+    }
+  }
+}
+
 .main {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+
+  .header,
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+
+    .checkBox,
+    .title,
+    .quantity,
+    .address {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .checkBox {
+      width: 5%;
+      background-color: aquamarine;
+    }
+    .title {
+      width: 25%;
+      background-color: grey;
+    }
+
+    .quantity {
+      width: 20%;
+      background-color: rgb(184, 162, 130);
+    }
+
+    .address {
+      width: 40%;
+      background-color: rgb(181, 218, 210);
+    }
+
+    .actions {
+      width: 10%;
+      background-color: rgb(145, 214, 156);
+    }
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+  }
 }

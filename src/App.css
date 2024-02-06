@@ -3,7 +3,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  min-width: 1240px;
+  min-width: 900px;
 }
 
 #root {

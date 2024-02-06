@@ -11,7 +11,7 @@ export const companies: ICompanies = [
   {
     id: "22222",
     name: "CompanyTwo",
-    adress: "Moskow",
+    adress: "Moskow ul. Kirova 7/4 99 ind: 222000",
     employees: employees,
   },
   {
