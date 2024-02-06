@@ -6,7 +6,9 @@ import styles from "./Employees.module.scss";
 import { IEmployee } from "../../interfaces/interfaces";
 import {
   addCheckedCompany,
+  addCheckedEmployee,
   removeCheckedCompany,
+  removeCheckedEmployee,
 } from "../../redux/slices/masterSlice";
 
 type Props = {
@@ -17,19 +19,26 @@ export const Employee: FC<Props> = ({ employee }) => {
   const checkedCompanies = useAppSelector(
     (state) => state.master.checkedCompanies
   );
+  const checkedEmployees = useAppSelector(
+    (state) => state.master.checkedEmployees
+  );
   const dispatch = useAppDispatch();
 
   function handleCheckItem() {
-    // if (!checkedCompanies.includes(company.id)) {
-    //   dispatch(addCheckedCompany(company.id));
-    // } else {
-    //   dispatch(removeCheckedCompany(company.id));
-    // }
+    if (!checkedEmployees.includes(employee.id)) {
+      dispatch(addCheckedEmployee(employee.id));
+    } else {
+      dispatch(removeCheckedEmployee(employee.id));
+    }
   }
   return (
     <div className={styles.row}>
       <div className={styles.checkBox}>
-        <input type="checkbox" checked={true} onChange={handleCheckItem} />
+        <input
+          type="checkbox"
+          checked={checkedEmployees.includes(employee.id)}
+          onChange={handleCheckItem}
+        />
       </div>
       <div className={styles.surname}>{employee.surname}</div>
       <div className={styles.quantity}>{employee.firstName}</div>

@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import { IoMdAddCircleOutline } from "react-icons/io";
 import { TbUsersPlus, TbUsersMinus } from "react-icons/tb";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Employees.module.scss";
@@ -19,7 +18,7 @@ export const Employees: FC = () => {
   const dispatch = useAppDispatch();
 
   function handleChange() {
-    if (employees.length !== checkedEmployees.length) {
+    if (checkedEmployees.length !== employees.length) {
       dispatch(checkAllEmployees(true));
     } else {
       dispatch(checkAllEmployees(false));
@@ -27,7 +26,9 @@ export const Employees: FC = () => {
   }
 
   useEffect(() => {
-    console.log("сотрудники юзэффект");
+    console.log(
+      "сотрудники юзэффект" + (checkedEmployees.length === employees.length)
+    );
     if (checkedCompanies.length === 1) {
       const getEmployeesList = (companies: ICompanies, id: string) => {
         const company = companies.filter((item) => item.id === id);
@@ -42,21 +43,24 @@ export const Employees: FC = () => {
 
   return (
     <>
-      {employees && (
+      {employees.length > 0 ? (
         <>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
               <div className={styles.options}>
                 <input
                   type="checkbox"
-                  id="allChecked"
-                  checked={checkedEmployees.length === employees.length}
+                  id="allCheckedEmployees"
+                  checked={
+                    checkedEmployees.length === employees.length &&
+                    employees.length !== 0
+                  }
                   onChange={handleChange}
                 />
-                <label htmlFor="allChecked">Выделить все</label>
+                <label htmlFor="allCheckedEmployees">Выделить всех</label>
               </div>
               <div className={styles.options}>
-                {employees.length === 0 && (
+                {checkedEmployees.length === 0 && (
                   <>
                     <a className={styles.icon}>
                       <TbUsersPlus size="1.5em" />
@@ -64,7 +68,7 @@ export const Employees: FC = () => {
                     <a>Добавить сотрудника</a>
                   </>
                 )}
-                {employees.length !== 0 && (
+                {checkedEmployees.length !== 0 && (
                   <>
                     <a className={styles.icon}>
                       <TbUsersMinus size="1.5em" />
@@ -88,6 +92,12 @@ export const Employees: FC = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.table}>
+            <div className={styles.tableHeader}>Компания не выбрана</div>
           </div>
         </>
       )}
