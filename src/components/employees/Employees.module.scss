@@ -9,12 +9,21 @@
     justify-content: space-around;
     align-items: center;
     height: 40px;
+    background-color: rgb(131, 131, 131);
+    border-bottom: 1px solid #585858;
+    font-size: 14px;
 
     .options {
       height: 40px;
-      width: 170px;
+      width: 180px;
       display: flex;
       align-items: center;
+      color: "#A1A1AA";
+
+      &:hover {
+        color: rgb(235, 235, 235);
+        cursor: default;
+      }
 
       a,
       label {
@@ -31,15 +40,29 @@
   display: flex;
   flex-direction: column;
 
-  .header,
+  .header {
+    border-bottom: 1px solid #585858;
+  }
+
   .row {
+    border-bottom: 1px solid #949494;
+  }
+
+  .activeRow {
+    border-bottom: 1px solid #949494;
+    background-color: #c4c4c4;
+  }
+
+  .header,
+  .row,
+  .activeRow {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 40px;
 
     .checkBox,
-    .title,
+    .surname,
     .quantity,
     .address {
       display: flex;
@@ -48,26 +71,32 @@
     }
     .checkBox {
       width: 5%;
-      background-color: aquamarine;
+      background-color: rgb(243, 243, 243);
     }
-    .title {
+    .surname {
       width: 25%;
-      background-color: grey;
     }
 
     .quantity {
       width: 20%;
-      background-color: rgb(184, 162, 130);
+      background-color: rgb(243, 243, 243);
     }
 
     .address {
       width: 40%;
-      background-color: rgb(181, 218, 210);
     }
 
     .actions {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
       width: 10%;
-      background-color: rgb(145, 214, 156);
+      background-color: rgb(243, 243, 243);
+      color: #949494;
+
+      &:hover {
+        color: rgb(38, 130, 236);
+      }
     }
   }
 

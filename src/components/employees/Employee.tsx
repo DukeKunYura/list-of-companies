@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { AiOutlineDelete } from "react-icons/ai";
+import { BiSolidEdit } from "react-icons/bi";
 import styles from "./Employees.module.scss";
 import { IEmployee } from "../../interfaces/interfaces";
 import {
@@ -29,10 +31,13 @@ export const Employee: FC<Props> = ({ employee }) => {
       <div className={styles.checkBox}>
         <input type="checkbox" checked={true} onChange={handleCheckItem} />
       </div>
-      <div className={styles.title}>{employee.firstName}</div>
-      <div className={styles.quantity}>{employee.surmame}</div>
+      <div className={styles.surname}>{employee.surname}</div>
+      <div className={styles.quantity}>{employee.firstName}</div>
       <div className={styles.address}>{employee.position}</div>
-      <div className={styles.actions}>+ -</div>
+      <div className={styles.actions}>
+        <BiSolidEdit size="1.6em" />
+        <AiOutlineDelete size="1.6em" />
+      </div>
     </div>
   );
 };

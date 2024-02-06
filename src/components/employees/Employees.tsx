@@ -59,15 +59,15 @@ export const Employees: FC = () => {
                 {employees.length === 0 && (
                   <>
                     <a className={styles.icon}>
-                      <TbUsersPlus color="#A1A1AA" size="1.5em" />
+                      <TbUsersPlus size="1.5em" />
                     </a>
-                    <a>Добавить компанию</a>
+                    <a>Добавить сотрудника</a>
                   </>
                 )}
                 {employees.length !== 0 && (
                   <>
                     <a className={styles.icon}>
-                      <TbUsersMinus color="#A1A1AA" size="1.5em" />
+                      <TbUsersMinus size="1.5em" />
                     </a>
                     <a>Удалить выбранных</a>
                   </>
@@ -77,12 +77,9 @@ export const Employees: FC = () => {
             <div className={styles.main}>
               <div className={styles.header}>
                 <div className={styles.checkBox}></div>
-                <div className={styles.title}>Название</div>
-                <div className={styles.quantity}>
-                  Количество <br />
-                  сотрудников
-                </div>
-                <div className={styles.address}>Адрес</div>
+                <div className={styles.surname}>Фамилия</div>
+                <div className={styles.quantity}>Имя</div>
+                <div className={styles.address}>Должность</div>
                 <div className={styles.actions}></div>
               </div>
               <div className={styles.items}>

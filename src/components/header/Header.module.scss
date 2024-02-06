@@ -4,8 +4,11 @@
   height: 44px;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid #82828a;
+  background-color: #343450;
+  border-bottom: 1px solid #a9a9aa;
   padding-right: 8px;
+  color: #a9a9aa;
+  font-size: 16px;
 
   .icon {
     display: flex;

@@ -35,7 +35,7 @@ export const Companies: FC = () => {
           {checked.length === 0 && (
             <>
               <a className={styles.icon}>
-                <TbCategoryPlus color="#A1A1AA" size="1.5em" />
+                <TbCategoryPlus size="1.5em" />
               </a>
               <a>Добавить компанию</a>
             </>
@@ -43,7 +43,7 @@ export const Companies: FC = () => {
           {checked.length !== 0 && (
             <>
               <a className={styles.icon}>
-                <TbCategoryMinus color="#A1A1AA" size="1.5em" />
+                <TbCategoryMinus size="1.5em" />
               </a>
               <a>Удалить выбранные</a>
             </>

@@ -2,6 +2,8 @@ import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Companies.module.scss";
 import { ICompany } from "../../interfaces/interfaces";
+import { AiOutlineDelete } from "react-icons/ai";
+import { BiSolidEdit } from "react-icons/bi";
 import {
   addCheckedCompany,
   removeCheckedCompany,
@@ -25,7 +27,11 @@ export const Company: FC<Props> = ({ company }) => {
     }
   }
   return (
-    <div className={styles.row}>
+    <div
+      className={
+        checkedCompanies.includes(company.id) ? styles.activeRow : styles.row
+      }
+    >
       <div className={styles.checkBox}>
         <input
           type="checkbox"
@@ -36,7 +42,10 @@ export const Company: FC<Props> = ({ company }) => {
       <div className={styles.title}>{company.name}</div>
       <div className={styles.quantity}>{company.employees.length}</div>
       <div className={styles.address}>{company.adress}</div>
-      <div className={styles.actions}>+ -</div>
+      <div className={styles.actions}>
+        <BiSolidEdit size="1.6em" />
+        <AiOutlineDelete size="1.6em" />
+      </div>
     </div>
   );
 };

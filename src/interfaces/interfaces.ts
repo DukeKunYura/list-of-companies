@@ -9,7 +9,7 @@ export type ICompanies = ICompany[];
 
 export interface IEmployee {
   id: string;
-  surmame: string;
+  surname: string;
   firstName: string;
   position: string;
 }

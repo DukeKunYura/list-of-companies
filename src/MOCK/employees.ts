@@ -4,19 +4,19 @@ export const employees: IEmployees = [
   {
     id: "11111",
     firstName: "Ivan",
-    surmame: "Ivanov",
+    surname: "Ivanov",
     position: "boss",
   },
   {
     id: "22222",
     firstName: "Petr",
-    surmame: "Ivanov",
+    surname: "Ivanov",
     position: "driver",
   },
   {
     id: "33333",
     firstName: "Semen",
-    surmame: "Ivanov",
+    surname: "Ivanov",
     position: "driver",
   },
 ];
