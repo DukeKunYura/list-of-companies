@@ -2,9 +2,13 @@ import { FC, useEffect, useState } from "react";
 import { TbUsersPlus, TbUsersMinus } from "react-icons/tb";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Employees.module.scss";
-import { checkAllEmployees } from "../../redux/slices/masterSlice";
+import {
+  checkAllEmployees,
+  setIsEmployeeAdding,
+} from "../../redux/slices/masterSlice";
 import { ICompanies, IEmployees } from "../../interfaces/interfaces";
 import { Employee } from "./Employee";
+import { EmployeeAddForm } from "./EmployeeAddForm";
 
 export const Employees: FC = () => {
   const checkedCompanies = useAppSelector(
@@ -12,6 +16,9 @@ export const Employees: FC = () => {
   );
   const checkedEmployees = useAppSelector(
     (state) => state.master.checkedEmployees
+  );
+  const isEmployeeAdding = useAppSelector(
+    (state) => state.master.isEmployeeAdding
   );
   const companies = useAppSelector((state) => state.master.companies);
   const [employees, setEmployees] = useState<[] | IEmployees>([]);
@@ -36,7 +43,7 @@ export const Employees: FC = () => {
     } else {
       setEmployees([]);
     }
-  }, [checkedCompanies]);
+  }, [checkedCompanies, isEmployeeAdding]);
 
   return (
     <>
@@ -62,7 +69,13 @@ export const Employees: FC = () => {
                     <a className={styles.icon}>
                       <TbUsersPlus size="1.5em" />
                     </a>
-                    <a>Добавить сотрудника</a>
+                    <a
+                      onClick={() => {
+                        dispatch(setIsEmployeeAdding());
+                      }}
+                    >
+                      Добавить сотрудника
+                    </a>
                   </>
                 )}
                 {checkedEmployees.length !== 0 && (
@@ -84,6 +97,11 @@ export const Employees: FC = () => {
                 <div className={styles.actions}></div>
               </div>
               <div className={styles.items}>
+                {isEmployeeAdding && (
+                  <div className={styles.row}>
+                    <EmployeeAddForm />
+                  </div>
+                )}
                 {employees.map((item) => (
                   <Employee key={item.id} employee={item} />
                 ))}

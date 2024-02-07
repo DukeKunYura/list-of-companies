@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICompanies, ICompany } from "../../interfaces/interfaces";
+import { ICompanies, ICompany, IEmployee } from "../../interfaces/interfaces";
 import { companies } from "../../MOCK/companies";
 
 type TState = {
@@ -94,8 +94,11 @@ export const masterSlice = createSlice({
       state.checkedEmployees = [];
     },
     // добавление сотрудника
-    addEmloyee: (state, action) => {
-      state.companies = action.payload;
+    addEmloyee: (state, action: PayloadAction<IEmployee>) => {
+      const index: number = state.companies.findIndex(
+        (item) => (item.id = state.checkedCompanies[0])
+      );
+      state.companies[index].employees.unshift(action.payload);
       state.checkedEmployees = [];
     },
     // отображение инпута добавления сотрудника
