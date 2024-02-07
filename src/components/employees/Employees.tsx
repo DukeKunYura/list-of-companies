@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Employees.module.scss";
 import {
   checkAllEmployees,
+  deleteEmployees,
   setIsEmployeeAdding,
 } from "../../redux/slices/masterSlice";
 import { ICompanies, IEmployees } from "../../interfaces/interfaces";
@@ -19,6 +20,9 @@ export const Employees: FC = () => {
   );
   const isEmployeeAdding = useAppSelector(
     (state) => state.master.isEmployeeAdding
+  );
+  const editingEmployeeId = useAppSelector(
+    (state) => state.master.editingEmployeeId
   );
   const companies = useAppSelector((state) => state.master.companies);
   const [employees, setEmployees] = useState<[] | IEmployees>([]);
@@ -43,7 +47,7 @@ export const Employees: FC = () => {
     } else {
       setEmployees([]);
     }
-  }, [checkedCompanies, isEmployeeAdding]);
+  }, [checkedCompanies, isEmployeeAdding, editingEmployeeId, companies]);
 
   return (
     <>
@@ -83,7 +87,13 @@ export const Employees: FC = () => {
                     <a className={styles.icon}>
                       <TbUsersMinus size="1.5em" />
                     </a>
-                    <a>Удалить выбранных</a>
+                    <a
+                      onClick={() => {
+                        dispatch(deleteEmployees());
+                      }}
+                    >
+                      Удалить выбранных
+                    </a>
                   </>
                 )}
               </div>

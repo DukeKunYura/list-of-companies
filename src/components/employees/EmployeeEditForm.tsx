@@ -1,18 +1,21 @@
-import { FC, useId, useState } from "react";
+import { FC, useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import styles from "./Employees.module.scss";
+import { IEmployee } from "../../interfaces/interfaces";
 import { FaRegSave } from "react-icons/fa";
 import {
-  addEmloyee,
-  setIsEmployeeAdding,
+  saveEmployee,
+  setEditingEmployee,
 } from "../../redux/slices/masterSlice";
 
-export const EmployeeAddForm: FC = () => {
-  const [surname, setSurname] = useState<string>("");
-  const [firstName, setFirstName] = useState<string>("");
-  const [position, setPosition] = useState<string>("");
+type Props = {
+  employee: IEmployee;
+};
 
-  const id = useId();
+export const EmployeeEditForm: FC<Props> = ({ employee }) => {
+  const [surname, setSurname] = useState<string>(employee.surname);
+  const [firstName, setFirstName] = useState<string>(employee.firstName);
+  const [position, setPosition] = useState<string>(employee.position);
 
   const dispatch = useAppDispatch();
 
@@ -31,14 +34,14 @@ export const EmployeeAddForm: FC = () => {
   const handleSubmit = () => {
     if (surname !== "" && firstName !== "" && position !== "") {
       dispatch(
-        addEmloyee({
-          id,
+        saveEmployee({
+          ...employee,
           surname: surname,
           firstName: firstName,
           position: position,
         })
       );
-      dispatch(setIsEmployeeAdding());
+      dispatch(setEditingEmployee(null));
     }
   };
 
@@ -47,7 +50,6 @@ export const EmployeeAddForm: FC = () => {
       <div className={styles.checkBox}></div>
       <input
         className={styles.surnameInput}
-        placeholder="введите фамилию..."
         value={surname}
         maxLength={20}
         onChange={(e) => {
@@ -56,7 +58,6 @@ export const EmployeeAddForm: FC = () => {
       />
       <input
         className={styles.quantityInput}
-        placeholder="введите имя..."
         value={firstName}
         maxLength={20}
         onChange={(e) => {
@@ -65,7 +66,6 @@ export const EmployeeAddForm: FC = () => {
       />
       <input
         className={styles.adressInput}
-        placeholder="введите должность..."
         value={position}
         maxLength={40}
         onChange={(e) => {

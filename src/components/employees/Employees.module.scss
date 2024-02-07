@@ -76,14 +76,25 @@
     .surname {
       width: 25%;
     }
-
+    .surnameInput {
+      width: 25%;
+      padding-left: 5px;
+    }
     .quantity {
       width: 20%;
       background-color: rgb(243, 243, 243);
     }
-
+    .quantityInput {
+      width: 20%;
+      background-color: rgb(243, 243, 243);
+      padding-left: 5px;
+    }
     .address {
       width: 40%;
+    }
+    .adressInput {
+      width: 40%;
+      padding-left: 5px;
     }
 
     .actions {
