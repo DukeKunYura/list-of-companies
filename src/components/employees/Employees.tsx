@@ -26,9 +26,6 @@ export const Employees: FC = () => {
   }
 
   useEffect(() => {
-    console.log(
-      "сотрудники юзэффект" + (checkedEmployees.length === employees.length)
-    );
     if (checkedCompanies.length === 1) {
       const getEmployeesList = (companies: ICompanies, id: string) => {
         const company = companies.filter((item) => item.id === id);

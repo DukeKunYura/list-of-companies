@@ -1,17 +1,25 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICompanies } from "../../interfaces/interfaces";
+import { ICompanies, ICompany } from "../../interfaces/interfaces";
 import { companies } from "../../MOCK/companies";
 
 type TState = {
   companies: ICompanies;
   checkedCompanies: string[];
   checkedEmployees: string[];
+  isCompanyAdding: boolean;
+  isEmployeeAdding: boolean;
+  editingCompanyId: string | null;
+  editingEmployeeId: string | null;
 };
 
 const initialState: TState = {
   companies: companies,
   checkedCompanies: [],
   checkedEmployees: [],
+  isCompanyAdding: false,
+  isEmployeeAdding: false,
+  editingCompanyId: null,
+  editingEmployeeId: null,
 };
 
 export const masterSlice = createSlice({
@@ -19,14 +27,44 @@ export const masterSlice = createSlice({
   initialState,
   reducers: {
     // добавление компании
-    addCompany: (state, action) => {
-      state.companies = action.payload;
-      state.checkedEmployees = [];
+    addCompany: (state, action: PayloadAction<ICompany>) => {
+      state.companies.unshift(action.payload);
+    },
+    // удаление компании
+    deleteCompany: (state, action: PayloadAction<string>) => {
+      state.companies = state.companies.filter(
+        (item) => item.id !== action.payload
+      );
+    },
+    // удаление списка компаний
+    deleteCompanies: (state) => {
+      state.companies = state.companies.filter(
+        (item) => !state.checkedCompanies.includes(item.id)
+      );
+    },
+
+    // отображение инпута добавления компании
+    setIsCompanyAdding: (state) => {
+      state.isCompanyAdding = !state.isCompanyAdding;
     },
     // выбор компании
     addCheckedCompany: (state, action: PayloadAction<string>) => {
       state.checkedCompanies.push(action.payload);
       state.checkedEmployees = [];
+    },
+    // выбор компании для редактирвания
+    setEditingCompany: (state, action: PayloadAction<string | null>) => {
+      state.editingCompanyId = action.payload;
+    },
+    // сохранить изменения компании
+    saveCompany: (state, action: PayloadAction<ICompany>) => {
+      state.companies = state.companies.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
     },
     // отмена выбора компании
     removeCheckedCompany: (state, action: PayloadAction<string>) => {
@@ -49,9 +87,17 @@ export const masterSlice = createSlice({
       state.companies = action.payload;
       state.checkedEmployees = [];
     },
+    // отображение инпута добавления сотрудника
+    setIsEmployeeAdding: (state) => {
+      state.isEmployeeAdding = !state.isEmployeeAdding;
+    },
     // выбор сотрудника
     addCheckedEmployee: (state, action: PayloadAction<string>) => {
       state.checkedEmployees.push(action.payload);
+    },
+    // выбор сотрудника для редактирвания
+    setEditingEmployee: (state, action: PayloadAction<string | null>) => {
+      state.editingEmployeeId = action.payload;
     },
     // отмена выбора сотрудника
     removeCheckedEmployee: (state, action: PayloadAction<string>) => {
@@ -74,10 +120,17 @@ export const masterSlice = createSlice({
 
 export const {
   addCompany,
+  deleteCompany,
+  deleteCompanies,
+  setIsCompanyAdding,
   addCheckedCompany,
+  setEditingCompany,
+  saveCompany,
   removeCheckedCompany,
   checkAllCompanies,
   addEmloyee,
+  setIsEmployeeAdding,
+  setEditingEmployee,
   addCheckedEmployee,
   removeCheckedEmployee,
   checkAllEmployees,

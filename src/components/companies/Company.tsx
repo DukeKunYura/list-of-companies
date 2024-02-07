@@ -6,8 +6,11 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
 import {
   addCheckedCompany,
+  deleteCompany,
   removeCheckedCompany,
+  setEditingCompany,
 } from "../../redux/slices/masterSlice";
+import { CompanyEditForm } from "./CompanyEditForm";
 
 type Props = {
   company: ICompany;
@@ -16,6 +19,9 @@ type Props = {
 export const Company: FC<Props> = ({ company }) => {
   const checkedCompanies = useAppSelector(
     (state) => state.master.checkedCompanies
+  );
+  const editingCompanyId = useAppSelector(
+    (state) => state.master.editingCompanyId
   );
   const dispatch = useAppDispatch();
 
@@ -32,20 +38,35 @@ export const Company: FC<Props> = ({ company }) => {
         checkedCompanies.includes(company.id) ? styles.activeRow : styles.row
       }
     >
-      <div className={styles.checkBox}>
-        <input
-          type="checkbox"
-          checked={checkedCompanies.includes(company.id)}
-          onChange={handleCheckItem}
-        />
-      </div>
-      <div className={styles.title}>{company.name}</div>
-      <div className={styles.quantity}>{company.employees.length}</div>
-      <div className={styles.address}>{company.adress}</div>
-      <div className={styles.actions}>
-        <BiSolidEdit size="1.6em" />
-        <AiOutlineDelete size="1.6em" />
-      </div>
+      {editingCompanyId === company.id && <CompanyEditForm company={company} />}
+      {editingCompanyId !== company.id && (
+        <>
+          <div className={styles.checkBox}>
+            <input
+              type="checkbox"
+              checked={checkedCompanies.includes(company.id)}
+              onChange={handleCheckItem}
+            />
+          </div>
+          <div className={styles.title}>{company.name}</div>
+          <div className={styles.quantity}>{company.employees.length}</div>
+          <div className={styles.address}>{company.adress}</div>
+          <div className={styles.actions}>
+            <BiSolidEdit
+              size="1.6em"
+              onClick={() => {
+                dispatch(setEditingCompany(company.id));
+              }}
+            />
+            <AiOutlineDelete
+              size="1.6em"
+              onClick={() => {
+                dispatch(deleteCompany(company.id));
+              }}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

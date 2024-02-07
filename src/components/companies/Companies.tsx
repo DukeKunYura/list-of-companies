@@ -2,15 +2,23 @@ import { FC } from "react";
 import { TbCategoryPlus, TbCategoryMinus } from "react-icons/tb";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Companies.module.scss";
-import { checkAllCompanies } from "../../redux/slices/masterSlice";
+import {
+  checkAllCompanies,
+  deleteCompanies,
+  setEditingCompany,
+  setIsCompanyAdding,
+} from "../../redux/slices/masterSlice";
 import { Company } from "./Company";
+import { CompanyAddForm } from "./CompanyAddForm";
 
 export const Companies: FC = () => {
   const checked = useAppSelector((state) => state.master.checkedCompanies);
   const companies = useAppSelector((state) => state.master.companies);
-  const dispatch = useAppDispatch();
+  const isCompanyAdding = useAppSelector(
+    (state) => state.master.isCompanyAdding
+  );
 
-  console.log(checked);
+  const dispatch = useAppDispatch();
 
   function handleChange() {
     if (checked.length !== companies.length) {
@@ -37,7 +45,13 @@ export const Companies: FC = () => {
               <a className={styles.icon}>
                 <TbCategoryPlus size="1.5em" />
               </a>
-              <a>Добавить компанию</a>
+              <a
+                onClick={() => {
+                  dispatch(setIsCompanyAdding());
+                }}
+              >
+                Добавить компанию
+              </a>
             </>
           )}
           {checked.length !== 0 && (
@@ -45,7 +59,13 @@ export const Companies: FC = () => {
               <a className={styles.icon}>
                 <TbCategoryMinus size="1.5em" />
               </a>
-              <a>Удалить выбранные</a>
+              <a
+                onClick={() => {
+                  dispatch(deleteCompanies());
+                }}
+              >
+                Удалить выбранные
+              </a>
             </>
           )}
         </div>
@@ -62,6 +82,11 @@ export const Companies: FC = () => {
           <div className={styles.actions}></div>
         </div>
         <div className={styles.items}>
+          {isCompanyAdding && (
+            <div className={styles.activeRow}>
+              <CompanyAddForm />
+            </div>
+          )}
           {companies.map((item) => (
             <Company key={item.id} company={item} />
           ))}
