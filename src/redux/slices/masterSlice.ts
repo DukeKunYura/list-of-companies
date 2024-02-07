@@ -29,23 +29,29 @@ export const masterSlice = createSlice({
     // добавление компании
     addCompany: (state, action: PayloadAction<ICompany>) => {
       state.companies.unshift(action.payload);
+      state.checkedEmployees = [];
+      state.checkedCompanies = [];
     },
     // удаление компании
     deleteCompany: (state, action: PayloadAction<string>) => {
       state.companies = state.companies.filter(
         (item) => item.id !== action.payload
       );
+      state.checkedEmployees = [];
+      state.checkedCompanies = [];
     },
     // удаление списка компаний
     deleteCompanies: (state) => {
       state.companies = state.companies.filter(
         (item) => !state.checkedCompanies.includes(item.id)
       );
+      state.checkedEmployees = [];
+      state.checkedCompanies = [];
     },
-
     // отображение инпута добавления компании
     setIsCompanyAdding: (state) => {
       state.isCompanyAdding = !state.isCompanyAdding;
+      state.editingCompanyId = null;
     },
     // выбор компании
     addCheckedCompany: (state, action: PayloadAction<string>) => {
@@ -55,6 +61,9 @@ export const masterSlice = createSlice({
     // выбор компании для редактирвания
     setEditingCompany: (state, action: PayloadAction<string | null>) => {
       state.editingCompanyId = action.payload;
+      if (state.isCompanyAdding) {
+        state.isCompanyAdding = false;
+      }
     },
     // сохранить изменения компании
     saveCompany: (state, action: PayloadAction<ICompany>) => {
@@ -65,6 +74,8 @@ export const masterSlice = createSlice({
           return item;
         }
       });
+      state.checkedEmployees = [];
+      state.checkedCompanies = [];
     },
     // отмена выбора компании
     removeCheckedCompany: (state, action: PayloadAction<string>) => {

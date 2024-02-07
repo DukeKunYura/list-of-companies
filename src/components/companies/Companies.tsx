@@ -5,7 +5,6 @@ import styles from "./Companies.module.scss";
 import {
   checkAllCompanies,
   deleteCompanies,
-  setEditingCompany,
   setIsCompanyAdding,
 } from "../../redux/slices/masterSlice";
 import { Company } from "./Company";
@@ -34,7 +33,9 @@ export const Companies: FC = () => {
           <input
             type="checkbox"
             id="allChecked"
-            checked={checked.length === companies.length}
+            checked={
+              checked.length === companies.length && companies.length !== 0
+            }
             onChange={handleChange}
           />
           <label htmlFor="allChecked">Выделить все</label>

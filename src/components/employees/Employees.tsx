@@ -40,7 +40,7 @@ export const Employees: FC = () => {
 
   return (
     <>
-      {employees.length > 0 ? (
+      {checkedCompanies.length === 1 ? (
         <>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
