@@ -12,6 +12,9 @@ type Props = {
   employee: IEmployee;
 };
 
+/**
+ * Компонент рендерит форму редактирования сотрудника
+ */
 export const EmployeeEditForm: FC<Props> = ({ employee }) => {
   const [surname, setSurname] = useState<string>(employee.surname);
   const [firstName, setFirstName] = useState<string>(employee.firstName);

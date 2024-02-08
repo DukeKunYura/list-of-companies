@@ -7,6 +7,9 @@ import {
   setIsEmployeeAdding,
 } from "../../redux/slices/masterSlice";
 
+/**
+ * Компонент рендерит форму добавления сотрудника
+ */
 export const EmployeeAddForm: FC = () => {
   const [surname, setSurname] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");

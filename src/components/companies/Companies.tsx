@@ -10,6 +10,9 @@ import {
 import { Company } from "./Company";
 import { CompanyAddForm } from "./CompanyAddForm";
 
+/**
+ * Компонент отвечает за рендер таблицы компании и меню опций в ее хедере
+ */
 export const Companies: FC = () => {
   const checked = useAppSelector((state) => state.master.checkedCompanies);
   const companies = useAppSelector((state) => state.master.companies);

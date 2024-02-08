@@ -16,6 +16,9 @@ type Props = {
   company: ICompany;
 };
 
+/**
+ * Компонент рендерит строку компания
+ */
 export const Company: FC<Props> = ({ company }) => {
   const checkedCompanies = useAppSelector(
     (state) => state.master.checkedCompanies

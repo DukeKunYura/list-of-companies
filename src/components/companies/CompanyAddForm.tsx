@@ -4,6 +4,9 @@ import styles from "./Companies.module.scss";
 import { FaRegSave } from "react-icons/fa";
 import { addCompany, setIsCompanyAdding } from "../../redux/slices/masterSlice";
 
+/**
+ * Компонент рендерит форму добавления компании
+ */
 export const CompanyAddForm: FC = () => {
   const [name, setName] = useState<string>("");
   const [adress, setAdress] = useState<string>("");

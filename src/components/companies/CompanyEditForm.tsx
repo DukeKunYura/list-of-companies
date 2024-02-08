@@ -9,6 +9,9 @@ type Props = {
   company: ICompany;
 };
 
+/**
+ * Компонент рендерит форму редактирования компании
+ */
 export const CompanyEditForm: FC<Props> = ({ company }) => {
   const [name, setName] = useState<string>(company.name);
   const [adress, setAdress] = useState<string>(company.adress);

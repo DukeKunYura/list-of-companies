@@ -16,6 +16,9 @@ type Props = {
   employee: IEmployee;
 };
 
+/**
+ * Компонент рендерит строку сотрудник
+ */
 export const Employee: FC<Props> = ({ employee }) => {
   const editingEmployeeId = useAppSelector(
     (state) => state.master.editingEmployeeId

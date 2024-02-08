@@ -11,6 +11,9 @@ import { ICompanies, IEmployees } from "../../interfaces/interfaces";
 import { Employee } from "./Employee";
 import { EmployeeAddForm } from "./EmployeeAddForm";
 
+/**
+ * Компонент отвечает за рендер таблицы сотрудники и меню опций в ее хедере
+ */
 export const Employees: FC = () => {
   const checkedCompanies = useAppSelector(
     (state) => state.master.checkedCompanies
